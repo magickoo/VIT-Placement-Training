@@ -1,4 +1,9 @@
 // https://www.faceprep.in/c-plus-plus/find-the-house-numbers-between-which-noddy-can-build-the-largest-house/
+In the city of Toy land, there are N houses. Noddy is looking for a piece of land in the city to build his house. 
+He wants to buy the land where he can build the largest possible house. All the houses in the city lie in a straight line and 
+all of them are given a house number and position of the house from the entry point in the city. Noddy wants to find the house numbers 
+between which he can build the largest house.
+
 import java.util.*;
 public class q1HouseSpace {
     public static void main(String[] args){
