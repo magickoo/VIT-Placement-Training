@@ -1,3 +1,63 @@
-import java.util.Scanner;
-public class{
-public static void main(
+// https://www.faceprep.in/c-plus-plus/find-the-house-numbers-between-which-noddy-can-build-the-largest-house/
+import java.util.*;
+public class q1HouseSpace {
+    public static void main(String[] args){
+        Scanner sc =new Scanner(System.in);
+        int num = sc.nextInt();
+        int[] hno = new int[num];
+        int[] pos = new int[num];
+        for(int i=0;i<num;i++){
+            hno[i]= sc.nextInt();
+            pos[i] = sc.nextInt();
+        }
+
+        int[] copyPos = new int[num];
+        System.arraycopy(pos,0,copyPos,0,num);
+        for(int i=0;i<num;i++){
+            for(int j = i+1;j<num;j++){
+                //sort or swap
+                if(copyPos[i] > copyPos[j]){
+                    int temp = copyPos[i];
+                    copyPos[i] = copyPos[j];
+                    copyPos[j] = temp;
+                }
+            }
+        }
+        int t;
+        int max= 0;
+        int x1= 0 ;int x2= 0 ;
+        int pos1=0;
+        int pos2 = 0;
+        for(int i=0;i<num-1;i++){
+            t = copyPos[i+1] - copyPos[i];
+        
+        if(t>max){
+            x1= copyPos[i];
+            x2= copyPos[i+1];
+        }
+    }
+    for(int i=0;i<num;i++){
+        if(pos[i]==x1){
+            pos1=i;
+        }
+        else if(pos[i]==x2){
+            pos2 = i;
+        }
+    }
+    if(hno[pos1]>hno[pos2]){
+        System.out.println(hno[pos2]+" "+hno[pos1]);
+    }
+    else{
+        System.out.println(hno[pos1]+" "+hno[pos2]);
+    }
+    } 
+}
+Input
+5
+3 7
+1 9
+2 0
+5 15
+4 30
+Output
+4 5
