@@ -1,2 +1,3 @@
 //Count no of digits in a no
-int a= (int)(Math.log(n))/(
+int a= (int)(Math.log(n))/(Math.log(10))
+System.out.println(a+1);
