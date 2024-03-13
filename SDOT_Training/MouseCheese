@@ -16,10 +16,10 @@ Example 8x8 maze where Mooshak can get the cheese.
 
 import java.io.*;
 class Main{
-	public static int hasPath(int[][]maze){
+	public static boolean hasPath(int[][]maze){
 		if(helper(maze,0,0))
-			return 1;
-		return 0;
+			return true;
+		return false;
 	}
 	private static boolean helper(int [][]maze, int i, int j){
 		if(i<0 || j<0 || i>=maze.length || j>=maze.length || maze[i][j]==0)
@@ -35,16 +35,25 @@ class Main{
         maze[i][j] = 1;
 		return (op1|| op2 || op3 || op4);
 	}
-}
+
 	public static void main(String[] args)
 	{
-		int n;
-		int maze[][]={{1,0,1,1,1,0,0,1}
-		{1,1,1,1,1,1,1
+		//int n;
+		int[][] maze = {{1, 0, 1, 1, 1, 0, 0, 1},
+				{1, 0, 0, 0, 1, 1, 1, 1},
+				{1, 0, 0, 0, 0, 0, 0, 0},
+				{1, 0, 1, 0, 9, 0, 1, 1},
+				{1, 1, 1, 0, 1, 0, 0, 1},
+				{1, 0, 1, 0, 1, 1, 0, 1},
+				{1, 0, 0, 0, 0, 1, 0, 1},
+				{1, 1, 1, 1, 1, 1, 1, 1}};
+		if(hasPath(maze)){
+		    System.out.println("mouse found the cheeze");
+		}
+		else{
+		    System.out.println("no");
+		}
 		
-		
-
-
 	}
 }
 
