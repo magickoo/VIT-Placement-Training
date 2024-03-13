@@ -1,0 +1,4 @@
+int a= (int)(Math.log(n)/Math.log(2));
+int b= (int)(Math.pow(2,a));
+int res= (n-b)*2+1;
+print res;
