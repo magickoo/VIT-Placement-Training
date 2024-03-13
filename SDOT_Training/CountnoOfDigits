@@ -1,0 +1,2 @@
+//Count no of digits in a no
+int a= (int)(Math.log(n))/(
