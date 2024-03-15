@@ -1,0 +1,98 @@
+import java.util.*;
+class Node 
+{
+    int data;
+    Node next;
+}
+public class Main 
+{   
+    public static Node sll(int val,Node head)
+    {
+        Node newnode=new Node();
+        newnode.data=val;
+        newnode.next=null;
+        if(head==null)
+          head=newnode;
+        else 
+        { 
+            Node i,prev=null;
+    for(i=head;i!=null && i.data<val;prev=i,i=i.next);
+            if(i==head) //front 
+            {
+               newnode.next=i;
+               head=newnode;
+            }
+            else if(i==null) //last 
+            {
+                prev.next=newnode;
+            }
+            else 
+            {
+                prev.next=newnode;
+                newnode.next=i;
+            }
+        }
+        return head;
+       
+    }
+    public static void removeduplicates(Node head)
+    {   
+        Node i=head;
+        while(i.next!=null)
+        {
+        if(i.data==i.next.data)
+        {
+            i.next=i.next.next;
+        }
+        else 
+        {
+            i=i.next;
+        }
+        }
+    }
+    public static Node search_delete(Node head,int ele)
+    {
+        
+        Node i,prev=null;
+  for(i=head;i!=null && i.data!=ele;prev=i,i=i.next);
+        if(i==head)
+        {
+            head=head.next;
+        }
+        else if(i==null)
+        {
+            System.out.print("Element Not Found!!");
+        }
+        else 
+        {
+            prev.next=i.next;
+        }
+        return head;
+    }
+    public static void print(Node head)
+    {
+        for(Node i=head;i!=null;i=i.next)
+          System.out.print(i.data+" ");
+    }
+    public static void main(String[] args)
+    {   
+        Node head=null;
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            int val=sc.nextInt();
+            head=sll(val,head);
+        }
+        print(head);
+        System.out.print("\n"); 
+        removeduplicates(head);
+        print(head);
+        System.out.print("\n");
+        int ele=sc.nextInt();
+        head=search_delete(head,ele);
+        print(head);
+    }
+}
+
+
