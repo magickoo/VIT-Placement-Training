@@ -1,0 +1,56 @@
+import java.util.*;
+public class Main 
+{   
+    public static boolean solve(char[][] board,int i,int j,int row,int col,String word,int ind)
+    {  
+        if(ind==word.length())
+        {
+            return true;
+        }
+        if(i==-1||j==-1||i==row||j==col||board[i][j]!=word.charAt(ind))
+        {
+            return false;
+        }
+        char temp=board[i][j];
+        board[i][j]='*';
+boolean res= (solve(board,i+1,j,row,col,word,ind+1)||
+        solve(board,i-1,j,row,col,word,ind+1)||
+        solve(board,i,j-1,row,col,word,ind+1)||
+        solve(board,i,j+1,row,col,word,ind+1));
+        board[i][j]=temp;
+        return res;
+        
+    }
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int row=sc.nextInt(); 
+        int col=sc.nextInt(); 
+        int i,j;
+        char[][] board=new char[row][col];
+        for(i=0;i<row;i++)
+        {
+            String str=sc.next();
+            for(j=0;j<col;j++)
+              board[i][j]=str.charAt(j);
+        }
+        String word=sc.next();
+        int flag=0;
+        for(i=0;i<row;i++)
+        {
+            for(j=0;j<col;j++)
+            {
+           if(solve(board,i,j,row,col,word,0)==true)
+            {
+              System.out.print("True");
+              flag=1;
+            }
+            }
+        }
+        if(flag==0)
+         System.out.print("False");
+       
+    }
+}
+
+ 
