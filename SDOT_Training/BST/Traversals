@@ -1,0 +1,81 @@
+import java.util.*;
+class Node 
+{
+    int data;
+    Node left,right;
+}
+public class Main 
+{   
+    public static Node createnode(int val)
+    {
+        Node newnode=new Node();
+        newnode.data=val;
+        newnode.left=null;
+        newnode.right=null;
+        return newnode;
+    }
+    public static Node BST(Node root,int val)
+    {
+        if(root==null)
+          return createnode(val);
+        else 
+        {
+            if(root.data<val)
+            {
+              root.right=BST(root.right,val);
+            }
+            else 
+            {
+           root.left=BST(root.left,val);
+            }
+        }
+        return root;
+    }
+    public static void inorder(Node root)
+    {
+        if(root!=null)
+        {
+        inorder(root.left);
+        System.out.print(root.data+" ");
+        inorder(root.right);
+        }
+    }
+    public static void preorder(Node root)
+    {
+        if(root!=null)
+        {
+           System.out.print(root.data+" ");
+           preorder(root.left);
+           preorder(root.right);
+        }
+    }
+    public static void postorder(Node root)
+    {
+        if(root!=null)
+        {
+            postorder(root.left);
+            postorder(root.right);
+            System.out.print(root.data+" ");
+        }
+    }
+    public static void main(String[] args)
+    {   
+        Node root=null;
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int i;
+        for(i=1;i<=n;i++)
+        {
+            int val=sc.nextInt();
+            if(i==1)
+              root=BST(root,val); //BST(null,val)
+            else 
+              BST(root,val); //BST(1000,val);
+        }
+        inorder(root);
+        System.out.println();
+         preorder(root);
+        System.out.println();
+        postorder(root);
+    }
+}
