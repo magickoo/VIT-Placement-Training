@@ -1,81 +1,169 @@
 import java.util.*;
-class Node 
-{
+class Node{
     int data;
-    Node left,right;
-}
-public class Main 
-{   
-    public static Node createnode(int val)
-    {
-        Node newnode=new Node();
-        newnode.data=val;
-        newnode.left=null;
-        newnode.right=null;
-        return newnode;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data= data;
+        this.left = this.right= null;
     }
-    public static Node BST(Node root,int val)
-    {
-        if(root==null)
-          return createnode(val);
-        else 
-        {
-            if(root.data<val)
-            {
-              root.right=BST(root.right,val);
-            }
-            else 
-            {
-           root.left=BST(root.left,val);
-            }
+}
+class Main{
+    public static Node BST(Node root,int val){
+        if(root == null){
+            Node newnode = new Node(val);
+            //root = newnode;
+            return newnode;
+        }
+        if(val> root.data ){
+            root.right = BST(root.right,val);
+        }
+        else if(val< root.data){
+            root.left = BST(root.left,val);
         }
         return root;
     }
-    public static void inorder(Node root)
-    {
-        if(root!=null)
-        {
-        inorder(root.left);
-        System.out.print(root.data+" ");
-        inorder(root.right);
+    // public static Node Search(Node root, int key){
+    //      if (root == null || root.key == key)
+    //         return root;
+    //     // Key is greater than root's key
+    //     if (root.key < key)
+    //         return search(root.right, key);
+    //     // Key is smaller than root's key
+    //     return search(root.left, key);
+    // }
+    public static void Inorder(Node node){
+        if(node==null){
+            return;
+        }
+        Inorder(node.left);
+        System.out.print(node.data+" ");
+        Inorder(node.right);
+    }
+    public static void Preorder(Node node){
+        //root left right
+        if(node==null){
+            return;
+        }
+        System.out.print(node.data+" ");
+        Preorder(node.left);
+        Preorder(node.right);
+    }
+    public static void Postorder(Node node){
+        //left right root
+        if(node==null){
+            return;
+        }
+        Postorder(node.left);
+        Postorder(node.right);
+        System.out.print(node.data+" ");
+    }
+    // public static void Levelorder(Node root,int n){
+    //     if (root == null) {
+    //         root = getNode(data);
+    //         return root;
+    //     }
+    //     if (data <= root.data)
+    //         root.left = LevelOrder(root.left, data);
+    //     else
+    //         root.right = LevelOrder(root.right, data);
+    //     return root;
+    // }
+    public static int FindHeight(Node node){
+        if (node == null)
+            return 0;
+        else {
+            /* compute the depth of each subtree */
+            int lheight = FindHeight(node.left);
+            int rheight = FindHeight(node.right);
+ 
+            /* use the larger one */
+            if (lheight > rheight)
+                return (lheight + 1);
+            else
+                return (rheight + 1);
         }
     }
-    public static void preorder(Node root)
-    {
-        if(root!=null)
-        {
-           System.out.print(root.data+" ");
-           preorder(root.left);
-           preorder(root.right);
+    public static int FindCeil(Node node, int key){
+        // Base case
+        if (node == null) {
+            return -1;
+        }
+        // equal key
+        if (node.data == key) {
+            return node.data;
+        }
+        // If root's key is smaller,
+        // ceil must be in right subtree
+        if (node.data < key) {
+            return FindCeil(node.right, key);
+        }
+         public static int FindFloor(Node node, int key){
+        // Base case
+        if (node == null) {
+            return -1;
+        }
+        // equal key
+        if (node.data == key) {
+            return node.data;
+        }
+        // If root's key is smaller,
+        // ceil must be in right subtree
+        if (node.data > key) {
+            return FindCeil(node.left, key);
         }
     }
-    public static void postorder(Node root)
-    {
-        if(root!=null)
-        {
-            postorder(root.left);
-            postorder(root.right);
-            System.out.print(root.data+" ");
+    public static Node deleteNode(Node root,int key){
+        //base case
+        if(root==null){
+            return root;
         }
+        if(root.data> key){
+            root.left = deleteNode(node.left, key);
+            return root;
+        }
+        else if(root.key< key){
+            root.right = deleteNode(root.right,key);
+            return root;
+        }
+        
     }
-    public static void main(String[] args)
-    {   
+    
+    //  public static int Findfloor(Node root,int key){
+         
+    // }
+    
+    public static void main(String[] args) {
+        //initia
         Node root=null;
-        Scanner sc=new Scanner(System.in);
-        int n=sc.nextInt();
-        int i;
-        for(i=1;i<=n;i++)
-        {
-            int val=sc.nextInt();
-            if(i==1)
-              root=BST(root,val); //BST(null,val)
-            else 
-              BST(root,val); //BST(1000,val);
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int val;
+        //int arr = new int[n];
+        for(int i=0;i<n;i++){
+            val= sc.nextInt();
+        if(i==0){
+            //first element is the root of the bst tree
+            root = BST(root,val); //BST(null,val)
         }
-        inorder(root);
+        else{
+            BST(root,val);
+        }
+        }
+        System.out.println("Inorder traversal :");
+        Inorder(root);
         System.out.println();
-         preorder(root);
+        System.out.println("Preorder traversal :");
+        Preorder(root);
         System.out.println();
-        postorder(root);
+        System.out.println("Postorder traversal :");
+        Postorder(root);
+        System.out.println();
+        //System.out.println("Levelorder traversal :");
+        int height = FindHeight(root);
+       // System.out.println("Height of the tree is"+ height);
+        //int s= Search(root,5);
+        int ceil= FindCeil(root,0);
+        System.out.println("The ceil is " + ceil);
     }
 }
